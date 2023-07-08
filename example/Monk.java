@@ -5,12 +5,18 @@ package org.example;
  */
 public class Monk extends Wizard{
     /**
-     * Это конструктор для класса Монах
-     * @param name это имя Монаха
+     * Это конструктор для класса Монах. Параметры: максимальное здоровье 10, защита 3, атака 5, инициатива 2, максимальное количество маны 100
      */
-    public Monk(String name) {
-        super(name, 5, 2, new int[]{1, 5}, 100);
+    public Monk() {
+        super(5, 2, new int[]{1, 5}, 100, 100);
     }
 
-
+    /**
+     * Это метод получения информации об экземпляре класса Монах
+     * @return возвращает класс с именем, текущее здоровье, текущее количество маны
+     */
+    @Override
+    public String getInfo() {
+        return String.format("Монах %s, здоровье: %.1f/%d, мана: %d/%d", name, curHP, maxHP, curMana, maxMana);
+    }
 }

@@ -5,10 +5,18 @@ package org.example;
  */
 public class Thug extends Infantry{
     /**
-     * Это конструктор для класса Разбойник
-     * @param name это имя Разбойника
+     * Это конструктор для класса Разбойник. Параметры: максимальное здоровье 20, защита 8, атака 4, инициатива 4
      */
-    public Thug(String name) {
-        super(name, 8, 4, 4, new int[]{1, 5});
+    public Thug() {
+        super(8, 4, 4, new int[]{1, 5});
+    }
+
+    /**
+     * Это метод получения информации об экземпляре класса Разбойник
+     * @return возвращает класс с именем и текущее здоровье
+     */
+    @Override
+    public String getInfo() {
+        return String.format("Разбойник %s, здоровье: %.1f/%d", name, curHP, maxHP);
     }
 }

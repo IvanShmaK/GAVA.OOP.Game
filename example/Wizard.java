@@ -4,19 +4,21 @@ package org.example;
  * Это абстрактный класс Волшебник, наследуется от класса Юнит
  */
 public abstract class Wizard extends Unit{
-    int mana;
+    int maxMana;
+    int curMana;
 
     /**
      * Это конструктор для класса волшебник
-     * @param name это имя
      * @param attack это очки атаки
      * @param initiative это очки инициативы
      * @param damage это наносимый урон
-     * @param mana это количество маны
+     * @param maxMana это максимальное количество маны
+     * @param curMana это текущее количество маны
      */
-    public Wizard(String name, int attack, int initiative, int[] damage, int mana) {
-        super(name, 10, 10, 3, attack, initiative, damage);
-        this.mana = mana;
+    public Wizard(int attack, int initiative, int[] damage, int maxMana, int curMana) {
+        super(10, 10, 3, attack, initiative, damage);
+        this.maxMana = maxMana;
+        this.curMana = curMana;
     }
 
     public void heal() {} //метод лечения дружественных юнитов

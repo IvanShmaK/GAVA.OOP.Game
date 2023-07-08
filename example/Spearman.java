@@ -5,10 +5,18 @@ package org.example;
  */
 public class Spearman extends Infantry{
     /**
-     * Это конструктор для класса Копейщик
-     * @param name это имя Копейщика
+     * Это конструктор для класса Копейщик. Параметры: максимальное здоровье 20, защита 10, атака 5, инициатива 5
      */
-    public Spearman(String name) {
-        super(name, 10, 5, 5, new int[]{1, 5});
+    public Spearman() {
+        super(10, 5, 5, new int[]{1, 5});
+    }
+
+    /**
+     * Это метод получения информации об экземпляре класса Копейщик
+     * @return возвращает класс с именем и текущее здоровье
+     */
+    @Override
+    public String getInfo() {
+        return String.format("Копейщик %s, здоровье: %.1f/%d", name, curHP, maxHP);
     }
 }

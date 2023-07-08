@@ -4,19 +4,21 @@ package org.example;
  * Это абстрактный класс Стрелок, наследуется от абстрактного класса Юнит
  */
 public abstract class Shooter extends Unit{
-    int arrows;
+    int maxArrows;
+    int curArrows;
 
     /**
      * Это конструктор для класса Стрелок
-     * @param name это имя юнита
      * @param attack это очки атаки
      * @param initiative это очки инициативы
      * @param damage это наносимый урон
-     * @param arrows это количество стрел у юнита
+     * @param maxArrows это максимальное количество стрел у юнита
+     * @param curArrows это текущее количество стрел у юнита
      */
-    public Shooter(String name, int attack, int initiative, int[] damage, int arrows) {
-        super(name, 10, 10, 5, attack, initiative, damage);
-        this.arrows = arrows;
+    public Shooter(int attack, int initiative, int[] damage, int maxArrows, int curArrows) {
+        super(10, 10, 5, attack, initiative, damage);
+        this.maxArrows = maxArrows;
+        this.curArrows = curArrows;
     }
 
     public void shoot () {} //метод совершения выстрелов

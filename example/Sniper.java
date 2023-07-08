@@ -5,10 +5,18 @@ package org.example;
  */
 public class Sniper extends Shooter{
     /**
-     * Это конструктор для класса Снайпер
-     * @param name это имя снайпера
+     * Это конструктор для класса Снайпер. Параметры: максимальное здоровье 10, защита 5, атака 20, инициатива 7, максимальное количество стрел 5
      */
-    public Sniper(String name) {
-        super(name, 20, 7, new int[]{1, 5}, 5);
+    public Sniper() {
+        super(20, 7, new int[]{1, 5}, 5, 5);
+    }
+
+    /**
+     * Это метод получения информации об экземпляре класса Снайпер
+     * @return возвращает класс с именем, текущее здоровье и текущее количество стрел
+     */
+    @Override
+    public String getInfo() {
+        return String.format("Снайпер %s, здоровье: %.1f/%d, стрелы: %d/%d", name, curHP, maxHP, maxArrows, curArrows);
     }
 }

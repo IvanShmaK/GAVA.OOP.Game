@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Random;
+
 /**
  * Это класс-прототип всех юнитов
  */
@@ -11,8 +13,7 @@ public abstract class Unit {
     int[] damage;
 
     /**
-     * Это конструктор класса юнит
-     * @param name это имя юнита
+     * Это конструктор класса Юнит. Имя ему выбирается рандомно из списка имен (файл Name.java)
      * @param maxHP это максимальное здоровье юнита
      * @param curHP это текущее здоровье юнита
      * @param armor это очки защиты юнита
@@ -20,8 +21,8 @@ public abstract class Unit {
      * @param initiative это очки инициативы юнита
      * @param damage это уровень наносимого урона
      */
-    public Unit(String name, int maxHP, float curHP, int armor, int attack, int initiative, int[] damage) {
-        this.name = name;
+    public Unit(int maxHP, float curHP, int armor, int attack, int initiative, int[] damage) {
+        this.name = String.valueOf(Name.values()[new Random().nextInt(Name.values().length)]);
         this.maxHP = maxHP;
         this.curHP = curHP;
         this.armor = armor;
@@ -30,12 +31,18 @@ public abstract class Unit {
         this.damage = damage;
     }
 
-    public String getInfo() {} //метод получения информации о юните
+    /**
+     * Это метод получения информации о юните
+     * @return возвращает имя юнита
+     */
+    public String getInfo() {
+        return name;
+    }
 
     public void attack() {} //метод атаки другого юнита
 
     public void getDamage() {} //метод получения урона
 
-    public void step() {} //метод движения юнитов по игровому полю
+    public void step() {} //метод осуществления хода юнита
 }
 
