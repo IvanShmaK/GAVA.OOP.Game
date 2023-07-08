@@ -1,4 +1,4 @@
-package org.example;
+package org.game;
 
 /**
  * Это абстрактный класс Волшебник, наследуется от класса Юнит
@@ -20,6 +20,4 @@ public abstract class Wizard extends Unit{
         this.maxMana = maxMana;
         this.curMana = curMana;
     }
-
-    public void heal() {} //метод лечения дружественных юнитов
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.game;
 
 /**
  * Это класс Монах, наследуется от абстрактного класса Волшебник. Он лечит дружественных юнитов.
@@ -19,4 +19,6 @@ public class Monk extends Wizard{
     public String getInfo() {
         return String.format("Монах %s, здоровье: %.1f/%d, мана: %d/%d", name, curHP, maxHP, curMana, maxMana);
     }
+
+    public void heal() {} //метод лечения дружественных юнитов
 }
