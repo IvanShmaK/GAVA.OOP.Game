@@ -1,26 +1,43 @@
 package org.game;
 
+import java.util.ArrayList;
+
 /**
- * Это класс Маг, наследуется от абстрактного класса Волшебник. Он может атаковать вражеских юнитов магией, либо воскрешать падших с минимальным количеством здоровья
+ * Это класс Маг, наследуется от абстрактного класса Волшебник.
  */
 public class Magician extends Wizard{
     /**
-     * Это конструктор для класса Маг. Параметры: максимальное здоровье 10, защита 3, атака 8, инициатива 3, максимальное количество маны 150
+     * Это конструктор для класса Маг.
+     * @param x это координата по оси х
+     * @param y это координата по оси у
      */
-    public Magician() {
-        super(8, 3, new int[]{1, 5}, 150, 150);
-    }
+    public Magician(int x, int y) { super(x, y); }
 
     /**
      * Это метод получения информации об экземпляре класса Маг
-     * @return возвращает класс с именем, текущее здоровье, текущее количество маны
+     * @return возвращает класс с именем, текущее здоровье, текущее количество маны и координаты на поле
      */
     @Override
     public String getInfo() {
-        return String.format("Маг %s, здоровье: %.1f/%d, мана: %d/%d", name, curHP, maxHP, curMana, maxMana);
+        return String.format("Маг %s; здоровье: %.1f/%d; мана: %d/%d; координаты: х=%d, у=%d", name, curHP, maxHP, curMana, maxMana, coord.x, coord.y);
     }
 
-    public void castMagic () {} //метод атаки вражеских юнитов магией
+    /**
+     * Это метод получения имени юнита
+     * @return класс и имя юнита
+     */
+    @Override
+    public String getName() {
+        return String.format("Маг %s", name);
+    }
 
-    public void revival () {}  //метод воскрешения умерших дружественных юнитов с минимальным количеством здоровья
+    /**
+     * Это метод выполнения хода
+     * @param list это список юнитов-противников
+     */
+    @Override
+    public void step(ArrayList<Unit> list) {
+        System.out.printf("Ближайший к Магу %s противник - %s, расстояние до него - %.1f%n", name,
+                list.get((int)nearest(list)[1]).getName(), nearest(list)[0]);
+    }
 }

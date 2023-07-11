@@ -1,23 +1,23 @@
 package org.game;
 
 /**
- * Это абстрактный класс Волшебник, наследуется от класса Юнит
+ * Это абстрактный класс Волшебник, наследуется от класса Юнит. Лечит дружественных юнитов. Его наследники (классы Монах
+ * и Маг) получают параметры: максимальное здоровье 10, защита 3, атака 8, инициатива 2, максимальное количество маны 100
  */
 public abstract class Wizard extends Unit{
-    int maxMana;
-    int curMana;
+    int maxMana, curMana;
 
     /**
      * Это конструктор для класса волшебник
-     * @param attack это очки атаки
-     * @param initiative это очки инициативы
-     * @param damage это наносимый урон
-     * @param maxMana это максимальное количество маны
-     * @param curMana это текущее количество маны
+     * @param x это координата по оси х
+     * @param y это координата по оси у
      */
-    public Wizard(int attack, int initiative, int[] damage, int maxMana, int curMana) {
-        super(10, 10, 3, attack, initiative, damage);
-        this.maxMana = maxMana;
-        this.curMana = curMana;
+    public Wizard(int x, int y) {
+        super(10, 10, 3, 8, 2, new int[]{1, 5}, x, y);
+        this.maxMana = this.curMana = 100;
     }
+
+    public void heal() {} //метод лечения дружественных юнитов
+
+    public void manaRecovery() {}  //метод по восстановлению маны
 }

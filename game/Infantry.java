@@ -1,17 +1,16 @@
 package org.game;
 
 /**
- * Это абстрактный класс Пехота, наследуется от абстрактного класса Юнит
+ * Это абстрактный класс Пехота, наследуется от абстрактного класса Юнит. Атакует в ближнем бою. Его наследники
+ * (классы Разбойник и Копейщик) получают параметры: максимальное здоровье 20, защита 10, атака 10, инициатива 3
  */
 public abstract class Infantry extends Unit{
     /**
      * Это конструктор для класса Пехота
-     * @param armor это очки защиты юнита
-     * @param attack это очки атаки юнита
-     * @param initiative это очки инициативы юнита
-     * @param damage это наносимый урон
+     * @param x это координата по оси х
+     * @param y это координата по оси у
      */
-    public Infantry(int armor, int attack, int initiative, int[] damage) {
-        super(20, 20, armor, attack, initiative, damage);
+    public Infantry(int x, int y) {
+        super(20, 20, 10, 10, 3, new int[]{1, 5}, x, y);
     }
 }
