@@ -1,7 +1,5 @@
 package org.game;
 
-import java.util.ArrayList;
-
 /**
  * Это класс Маг, наследуется от абстрактного класса Волшебник.
  */
@@ -31,13 +29,5 @@ public class Magician extends Wizard{
         return String.format("Маг %s", name);
     }
 
-    /**
-     * Это метод выполнения хода
-     * @param list это список юнитов-противников
-     */
-    @Override
-    public void step(ArrayList<Unit> list) {
-        System.out.printf("Ближайший к Магу %s противник - %s, расстояние до него - %.1f%n", name,
-                list.get((int)nearest(list)[1]).getName(), nearest(list)[0]);
-    }
+
 }

@@ -1,7 +1,5 @@
 package org.game;
 
-import java.util.ArrayList;
-
 /**
  * Это класс Разбойник, наследуется от абстрактного класса Пехота.
  */
@@ -33,13 +31,5 @@ public class Thug extends Infantry{
         return String.format("Разбойник %s", name);
     }
 
-    /**
-     * Это метод выполнения хода
-     * @param list это список юнитов-противников
-     */
-    @Override
-    public void step(ArrayList<Unit> list) {
-        System.out.printf("Ближайший к Разбойнику %s противник - %s, расстояние до него - %.1f%n", name,
-                list.get((int)nearest(list)[1]).getName(), nearest(list)[0]);
-    }
+
 }

@@ -11,7 +11,7 @@ public abstract class Unit implements Interface {
     int maxHP;
     float curHP;
     int armor, attack, initiative;
-    int[] damage;
+    float[] damage;
     Coordinates coord;
 
     /**
@@ -25,7 +25,7 @@ public abstract class Unit implements Interface {
      * @param x это координата по оси х
      * @param y это координата по оси у
      */
-    public Unit(int maxHP, float curHP, int armor, int attack, int initiative, int[] damage, int x, int y) {
+    public Unit(int maxHP, float curHP, int armor, int attack, int initiative, float[] damage, int x, int y) {
         this.name = String.valueOf(Name.values()[new Random().nextInt(Name.values().length)]);
         this.maxHP = maxHP;
         this.curHP = curHP;
@@ -42,6 +42,7 @@ public abstract class Unit implements Interface {
      * @return массив, первым элементом которого будет расстояние до ближайшего вражеского юнита, а вторым - его индекс
      * в передаваемом списке
      */
+     //TODO: переделать метод, чтобы он возвращал ближайшего врага (Unit), причем это не должен быть труп (юнит с curHP=0)
     public double[] nearest (ArrayList<Unit> units) {
         double[] tempArr = new double[2];
         tempArr[0] = Double.MAX_VALUE;
@@ -54,5 +55,24 @@ public abstract class Unit implements Interface {
         return tempArr;
     }
 
+    /**
+     * Это метод получения урона юнитом. Он принимает на вход массив из значений повреждения (damage у атакующего
+     * юнита), затем у юнита от текущего здоровья отнимается урон (средний). Текущее здоровье не может быть меньше 0
+     * (если это так, юнит погибает). ЕслиЕсли значения отрицательные - реализуется эффект лечения (текущее здоровье
+     * увеличивается на размер урона, но не более максимального здоровья).
+     * @param array это параметр damage у атакующего юнита
+     */
+    @Override
+    public void getDamage(float[] array) {
+        float damage = (array[0] + array[1]) / 2;
+        if (this.curHP - damage > 0) {
+            this.curHP -= damage;
+        } else if (this.curHP - damage > maxHP) {
+            this.curHP = maxHP;
+        } else {
+            this.curHP = 0;
+            System.out.println("    " + this.getName() + " умирает");
+        }
+    }
 }
 

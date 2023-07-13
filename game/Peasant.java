@@ -13,17 +13,19 @@ public class Peasant extends Unit{
      * @param y это координата по оси у
      */
     public Peasant(int x, int y) {
-        super(1, 1, 1, 1, 1, new int[]{1}, x, y);
+        super(1, 1, 1, 1, 1, new float[]{1}, x, y);
     }
 
     /**
      * Это метод выполнения хода
-     * @param list это список юнитов-противников
+     * @param enemiesList это список юнитов-противников
+     * @param friendsList это список юнитов-союзников
      */
     @Override
-    public void step(ArrayList<Unit> list) {
-        System.out.printf("Ближайший к Крестьянину %s противник - %s, расстояние до него - %.1f%n", name,
-                list.get((int)nearest(list)[1]).getName(), nearest(list)[0]);
+    public void step(ArrayList<Unit> friendsList, ArrayList<Unit> enemiesList) {
+//        System.out.printf("Ближайший к Крестьянину %s противник - %s, расстояние до него - %.1f%n", name,
+//                enemiesList.get((int)nearest(enemiesList)[1]).getName(), nearest(enemiesList)[0]);
+        System.out.println(this.getInfo());
     }
 
     /**
