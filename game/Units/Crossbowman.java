@@ -1,4 +1,4 @@
-package org.game;
+package org.game.Units;
 
 /**
  * Это класс Арбалетчик, наследуется от абстрактного класса Стрелок.
@@ -19,7 +19,8 @@ public class Crossbowman extends Shooter{
      */
     @Override
     public String getInfo() {
-        return String.format("Арбалетчик %s; здоровье: %.1f/%d; стрелы: %d/%d; координаты: х=%d, у=%d", name, curHP, maxHP, curArrows, maxArrows, coord.x, coord.y);
+        return String.format("Арбалетчик %s; здоровье: %.1f/%d; стрелы: %d/%d; координаты: х=%d, у=%d; состояние: %s",
+                name, curHP, maxHP, curArrows, maxArrows, coord.x, coord.y, state);
     }
 
     /**

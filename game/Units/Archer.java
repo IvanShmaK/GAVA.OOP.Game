@@ -1,15 +1,15 @@
-package org.game;
+package org.game.Units;
 
 /**
  * Это класс Снайпер, наследуется от абстрактного класса Стрелок.
  */
-public class Sniper extends Shooter{
+public class Archer extends Shooter{
     /**
      * Это конструктор для класса Снайпер.
      * @param x это координата по оси х
      * @param y это координата по оси у
      */
-    public Sniper(int x, int y) {
+    public Archer(int x, int y) {
         super(x, y);
     }
 
@@ -19,7 +19,8 @@ public class Sniper extends Shooter{
      */
     @Override
     public String getInfo() {
-        return String.format("Снайпер %s; здоровье: %.1f/%d; стрелы: %d/%d; координаты: х=%d, у=%d", name, curHP, maxHP, curArrows, maxArrows, coord.x, coord.y);
+        return String.format("Снайпер %s; здоровье: %.1f/%d; стрелы: %d/%d; координаты: х=%d, у=%d; состояние: %s",
+                name, curHP, maxHP, curArrows, maxArrows, coord.x, coord.y, state);
     }
 
     /**

@@ -1,10 +1,10 @@
-package org.game;
+package org.game.Units;
 
 import java.util.ArrayList;
 
 /**
- * Это класс Крестьянин, наследуется от абстрактного класса Юнит. Он подносит стрелы для стрелков. Может атаковать
- * вражеского юнита, если тот окажется рядом.
+ * Это класс Крестьянин, наследуется от абстрактного класса Юнит. Он подносит стрелы для стрелков (за один ход один
+ * крестьянин приносит одну стрелу одному стрелку, после чего его статус меняется со "свободен" на "занят").
  */
 public class Peasant extends Unit{
     /**
@@ -17,7 +17,7 @@ public class Peasant extends Unit{
     }
 
     /**
-     * Это метод выполнения хода
+     * Это метод выполнения хода крестьянина. Если он жив (curHP > 0), его состояние меняется на свободен.
      * @param enemiesList это список юнитов-противников
      * @param friendsList это список юнитов-союзников
      */
@@ -26,6 +26,7 @@ public class Peasant extends Unit{
 //        System.out.printf("Ближайший к Крестьянину %s противник - %s, расстояние до него - %.1f%n", name,
 //                enemiesList.get((int)nearest(enemiesList)[1]).getName(), nearest(enemiesList)[0]);
         System.out.println(this.getInfo());
+        if (this.curHP > 0) this.state = "stand";
     }
 
     /**
@@ -34,8 +35,8 @@ public class Peasant extends Unit{
      */
     @Override
     public String getInfo() {
-        return String.format("Крестьянин %s; здоровье: %.1f/%d; координаты: х=%d, у=%d", name, curHP, maxHP, coord.x,
-                coord.y);
+        return String.format("Крестьянин %s; здоровье: %.1f/%d; координаты: х=%d, у=%d; состояние: %s", name, curHP,
+                maxHP, coord.x, coord.y, state);
     }
 
     /**
@@ -46,9 +47,5 @@ public class Peasant extends Unit{
     public String getName() {
         return String.format("Крестьянин %s", name);
     }
-
-
-
-    public void bringArrow () {} //метод доставки стрелы одному из стрелков один раз за ход
 
 }

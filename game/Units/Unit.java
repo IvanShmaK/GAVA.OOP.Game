@@ -1,4 +1,6 @@
-package org.game;
+package org.game.Units;
+
+import org.game.Name;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,12 +9,14 @@ import java.util.Random;
  * Это класс-прототип всех юнитов
  */
 public abstract class Unit implements Interface {
-    String name;
-    int maxHP;
-    float curHP;
-    int armor, attack, initiative;
-    float[] damage;
-    Coordinates coord;
+    protected String name;
+    protected int maxHP;
+    protected float curHP;
+    protected int armor, attack;
+    public  int initiative;
+    protected float[] damage;
+    protected Coordinates coord;
+    protected String state;
 
     /**
      * Это конструктор класса Юнит. Имя ему выбирается рандомно из списка имен (файл Name.java)
@@ -34,6 +38,7 @@ public abstract class Unit implements Interface {
         this.initiative = initiative;
         this.damage = damage;
         coord = new Coordinates(x, y);
+        this.state = "stand";
     }
 
     /**
@@ -42,7 +47,6 @@ public abstract class Unit implements Interface {
      * @return массив, первым элементом которого будет расстояние до ближайшего вражеского юнита, а вторым - его индекс
      * в передаваемом списке
      */
-     //TODO: переделать метод, чтобы он возвращал ближайшего врага (Unit), причем это не должен быть труп (юнит с curHP=0)
     public double[] nearest (ArrayList<Unit> units) {
         double[] tempArr = new double[2];
         tempArr[0] = Double.MAX_VALUE;
@@ -65,12 +69,13 @@ public abstract class Unit implements Interface {
     @Override
     public void getDamage(float[] array) {
         float damage = (array[0] + array[1]) / 2;
-        if (this.curHP - damage > 0) {
+        if (this.curHP - damage > 0 && this.curHP - damage <= maxHP) {
             this.curHP -= damage;
         } else if (this.curHP - damage > maxHP) {
             this.curHP = maxHP;
         } else {
             this.curHP = 0;
+            this.state = "dead";
             System.out.println("    " + this.getName() + " умирает");
         }
     }

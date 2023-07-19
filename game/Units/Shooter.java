@@ -1,4 +1,4 @@
-package org.game;
+package org.game.Units;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * максимальное здоровье 15, защита 5, атака 9, инициатива 4, максимальное количество стрел 5
  */
 public abstract class Shooter extends Unit{
-    int maxArrows, curArrows;
+    protected int maxArrows, curArrows;
 
     /**
      * Это конструктор для класса Стрелок
@@ -21,7 +21,10 @@ public abstract class Shooter extends Unit{
     }
 
     /**
-     * Это метод выполнения хода
+     * Это метод выполнения хода для стрелка. Если стрелок жив (curHP > 0) и у него есть стрелы (curArrows > 0), то
+     * он находит ближайшего противника и стреляет в него. Если в дружественном отряде есть живой крестьянин, который
+     * не занят (state == free), крестьянин приносит стрелку стрелу (количество стрел не уменьшается). Иначе количество
+     * стрел уменьшается на одну.
      * @param enemiesList это список юнитов-противников
      * @param friendsList это список юнитов-союзников
      */
@@ -34,11 +37,18 @@ public abstract class Shooter extends Unit{
         Unit nearestEnemy = enemiesList.get((int)nearest(enemiesList)[1]);
         System.out.println("    " + this.getName() + " атакует " + nearestEnemy.getName());
         nearestEnemy.getDamage(this.damage);
-        //if (friendsList.contains(Peasant.class)) return;   НЕ РАБОТАЕТ!!!!
+        this.state = "shot";
         for (Unit unit : friendsList) {
-            if (unit.getClass().equals(Peasant.class)) return;
+            if (unit.getClass().equals(Peasant.class) &&
+                    unit.curHP > 0 &&
+                    unit.state.equals("stand")) {
+                unit.state = "busy";
+                System.out.println("    " + this.getName() + " получил стрелу от " + unit.getName() + " и тот стал занят");
+                return;
+            }
         }
         this.curArrows--;
+        System.out.println("    " + this.getName() + " не получил стрелу, у него их стало " + this.curArrows);
     }
 
 }
