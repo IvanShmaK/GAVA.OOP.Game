@@ -28,4 +28,22 @@ public class Coordinates {
         int dy = coordinates.y - y;
         return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
+
+    /**
+     * Это метод расчета координат поля, в которые пойдет юнит. Если по оси х расстояние больше, юнит пойдет по оси х,
+     * Если нет - то по оси у.
+     * @param targetPosition это координаты ближайшего противника
+     * @return координаты клетки, на которую будет сделан ход
+     */
+    public Coordinates newPosition (Coordinates targetPosition) {
+        Coordinates newCoord = new Coordinates(x, y);
+        if (Math.abs(targetPosition.x - x) > Math.abs(targetPosition.y - y)) {
+            if (targetPosition.x - x > 0) newCoord.x++;
+            else newCoord.x--;
+        } else {
+            if (targetPosition.y - y > 0) newCoord.y++;
+            else newCoord.y--;
+        }
+        return newCoord;
+    }
 }

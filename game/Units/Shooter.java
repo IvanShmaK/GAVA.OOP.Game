@@ -16,8 +16,17 @@ public abstract class Shooter extends Unit{
      * @param y это координата по оси у
      */
     public Shooter(int x, int y) {
-        super(10, 10, 5, 9, 4, new float[]{1, 5}, x, y);
-        this.maxArrows = this.curArrows = 5;
+        super(10, 10, 9, 4, new float[]{1, 3}, x, y);
+        this.maxArrows = this.curArrows = 10;
+    }
+
+    /**
+     * Это метод получения информации об экземпляре класса Стрелок
+     * @return строку, содержащую общую информацию из класса Unit, плюс количество стрел
+     */
+    @Override
+    public String getInfo() {
+        return String.format("%s; Ar %d/%d", super.getInfo(), this.curArrows, this.maxArrows);
     }
 
     /**
@@ -30,25 +39,25 @@ public abstract class Shooter extends Unit{
      */
     @Override
     public void step(ArrayList<Unit> friendsList, ArrayList<Unit> enemiesList) {
-//        System.out.printf("Ближайший к %s противник - %s, расстояние до него - %.1f%n", this.getName(),
-//                enemiesList.get((int)nearest(enemiesList)[1]).getName(), nearest(enemiesList)[0]);
-        System.out.println(this.getInfo());
         if (this.curHP == 0 || this.curArrows == 0) return;
         Unit nearestEnemy = enemiesList.get((int)nearest(enemiesList)[1]);
-        System.out.println("    " + this.getName() + " атакует " + nearestEnemy.getName());
         nearestEnemy.getDamage(this.damage);
+//        System.out.println("Стрелок " + this.name + "[" + this.coord.x + ", " + this.coord.y + "]" + " выстрелил в "
+//                + nearestEnemy.name + "[" + nearestEnemy.coord.x + ", " + nearestEnemy.coord.y + "]" +
+//                " здоровья у него стало " + nearestEnemy.curHP);
         this.state = "shot";
         for (Unit unit : friendsList) {
             if (unit.getClass().equals(Peasant.class) &&
                     unit.curHP > 0 &&
                     unit.state.equals("stand")) {
                 unit.state = "busy";
-                System.out.println("    " + this.getName() + " получил стрелу от " + unit.getName() + " и тот стал занят");
+//                System.out.println("Стрелок " + this.name + " получил стрелу от крестьянин " + unit.name +
+//                        " у него их стало " + this.curArrows);
                 return;
             }
         }
         this.curArrows--;
-        System.out.println("    " + this.getName() + " не получил стрелу, у него их стало " + this.curArrows);
+        //System.out.println("Стрелок " + this.name + " не получил стрелу, у него их стало " + this.curArrows);
     }
 
 }

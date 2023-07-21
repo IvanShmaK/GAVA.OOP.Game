@@ -13,23 +13,4 @@ public class Thug extends Infantry{
         super(x, y);
     }
 
-    /**
-     * Это метод получения информации об экземпляре класса Разбойник
-     * @return возвращает класс с именем, текущее здоровье и координаты на поле
-     */
-    @Override
-    public String getInfo() {
-        return String.format("Разбойник %s; здоровье: %.1f/%d; координаты: х=%d, у=%d", name, curHP, maxHP, coord.x, coord.y);
-    }
-
-    /**
-     * Это метод получения имени юнита
-     * @return класс и имя юнита
-     */
-    @Override
-    public String getName() {
-        return String.format("Разбойник %s", name);
-    }
-
-
 }

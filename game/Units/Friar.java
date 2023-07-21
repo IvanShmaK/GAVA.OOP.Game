@@ -12,24 +12,4 @@ public class Friar extends Wizard{
     public Friar(int x, int y) {
         super(x, y);
     }
-
-    /**
-     * Это метод получения информации об экземпляре класса Монах
-     * @return возвращает класс с именем, текущее здоровье, текущее количество маны и координаты на поле
-     */
-    @Override
-    public String getInfo() {
-        return String.format("Монах %s; здоровье: %.1f/%d; мана: %d/%d; координаты: х=%d, у=%d", name, curHP, maxHP, curMana, maxMana, coord.x, coord.y);
-    }
-
-    /**
-     * Это метод получения имени юнита
-     * @return класс и имя юнита
-     */
-    @Override
-    public String getName() {
-        return String.format("Монах %s", name);
-    }
-
-
 }

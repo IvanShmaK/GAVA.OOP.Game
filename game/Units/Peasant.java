@@ -13,7 +13,7 @@ public class Peasant extends Unit{
      * @param y это координата по оси у
      */
     public Peasant(int x, int y) {
-        super(1, 1, 1, 1, 1, new float[]{1}, x, y);
+        super(10, 10, 1, 1, new float[]{1}, x, y);
     }
 
     /**
@@ -23,29 +23,10 @@ public class Peasant extends Unit{
      */
     @Override
     public void step(ArrayList<Unit> friendsList, ArrayList<Unit> enemiesList) {
-//        System.out.printf("Ближайший к Крестьянину %s противник - %s, расстояние до него - %.1f%n", name,
-//                enemiesList.get((int)nearest(enemiesList)[1]).getName(), nearest(enemiesList)[0]);
-        System.out.println(this.getInfo());
-        if (this.curHP > 0) this.state = "stand";
-    }
+        if (this.curHP > 0) {
+            this.state = "stand";
+            //System.out.println("Крестьянин " + this.name + " снова активен");
+        }
 
-    /**
-     * Это метод получения информации об экземпляре класса Крестьянин
-     * @return возвращает класс с именем, текущее здоровье и координаты на поле
-     */
-    @Override
-    public String getInfo() {
-        return String.format("Крестьянин %s; здоровье: %.1f/%d; координаты: х=%d, у=%d; состояние: %s", name, curHP,
-                maxHP, coord.x, coord.y, state);
     }
-
-    /**
-     * Это метод получения имени юнита
-     * @return класс и имя юнита
-     */
-    @Override
-    public String getName() {
-        return String.format("Крестьянин %s", name);
-    }
-
 }

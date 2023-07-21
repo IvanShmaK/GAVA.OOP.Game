@@ -1,6 +1,7 @@
 package org.game.Units;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Это абстрактный класс Волшебник, наследуется от класса Юнит. Лечит дружественных юнитов. Его наследники (классы Монах
@@ -15,38 +16,49 @@ public abstract class Wizard extends Unit{
      * @param y это координата по оси у
      */
     public Wizard(int x, int y) {
-        super(10, 10, 3, 8, 2, new float[]{-1, -5}, x, y);
+        super(10, 10, 8, 2, new float[]{-1, -3}, x, y);
         this.maxMana = this.curMana = 100;
     }
 
     /**
+     * Это метод получения информации об экземпляре класса волшебник
+     * @return строку, содержащую общую информацию из класса Unit, плюс количество маны
+     */
+    @Override
+    public String getInfo() {
+        return String.format("%s; Mana %d/%d", super.getInfo(), this.curMana, this.maxMana);
+    }
+
+    /**
      * Это метод выполнения хода волшебников. Если волшебник жив (curHP > 0) и у него есть мана (curMana > 0), то он
-     * находит среди своих союзников наиболее поврежденного юнита (того, у которого разница между максимальным и
-     * текущим здоровьем самая большая) и лечит его на величину урона. Если волшебник никого не лечит на данном ходу,
-     * он может восстановить ману в размере половины от затрачиваемой на одно лечение.
+     * находит среди своих союзников наиболее поврежденного юнита и лечит его. Если волшебник никого не лечит на данном ходу,
+     * он может восстановить ману.
      * @param enemiesList это список юнитов-противников
      * @param friendsList это список юнитов-союзников
      */
     @Override
     public void step(ArrayList<Unit> friendsList, ArrayList<Unit> enemiesList) {
-//        System.out.printf("Ближайший к %s противник - %s, расстояние до него - %.1f%n", this.getName(),
-//                enemiesList.get((int)nearest(enemiesList)[1]).getName(), nearest(enemiesList)[0]);
-        System.out.println(this.getInfo());
-        if (this.curHP == 0 || this.curMana == 0) return;
-        friendsList.sort(((o1, o2) -> (int) ((int) (o2.maxHP - o2.curHP) - (o1.maxHP - o1.curHP))));
-        if (friendsList.get(0).curHP > 0 && friendsList.get(0).curHP < friendsList.get(0).maxHP) {
-            friendsList.get(0).getDamage(this.damage);
+        if (this.curHP == 0) return;
+        friendsList.sort(Comparator.comparingInt(o -> o.curHP));
+        //friendsList.forEach(n -> System.out.println(n.name + n.curHP));
+        Unit tempUnit = null;
+        for (int i = 0; i < friendsList.size(); i++) {
+            if (friendsList.get(i).curHP > 0) {
+                tempUnit = friendsList.get(i);
+                break;
+            }
+        }
+        if (this.curMana >= 20 && tempUnit.curHP < tempUnit.maxHP) {
+            tempUnit.getDamage(this.damage);
             this.state = "treated";
             this.curMana -= 20;
-            System.out.println("    " + this.getName() + " лечит " + friendsList.get(0).getName() + ", здоровье у него " +
-                    "становится " + friendsList.get(0).curHP + ", маны у " + this.getName() + " становится " + this.curMana);
-            return;
-        }
-        System.out.println("Лечения никому не требовалось");
-        if (this.curMana < this.maxMana) {
+//            System.out.println("Волшебник " + this.name + " полечил " + tempUnit.name + "[" +
+//                    tempUnit.coord.x + ", " + tempUnit.coord.y + "], здоровья у него стало " +
+//                    tempUnit.curHP + " маны у него самого стало " + this.curMana);
+        } else if (this.curMana + 20 < this.maxMana){
             if (this.curMana + 20 < this.maxMana) this.curMana += 20;
             else this.curMana = this.maxMana;
-            System.out.println(this.getName() + " восстанавливает ману, её у него становится " + this.curMana);
-        }
+            //System.out.println("Волшебник " + this.name + " никого не лечил, восстановил ману, ее у него стало " + this.curMana);
+        } //else System.out.println("Волшебнику " + this.name + " восстановления маны не требовалось");
     }
 }

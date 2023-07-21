@@ -31,11 +31,11 @@ public class View {
             for (Unit human: Main.allTeam) {
                 if (human.getCoords()[0] == x && human.getCoords()[1] == y){
                     if (human.getHp() == 0) {
-                        out = "|" + (AnsiColors.ANSI_RED + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                        out = "|" + (AnsiColors.ANSI_RED + human.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
                         break;
                     }
-                    if (Main.team1.contains(human)) out = "|" + (AnsiColors.ANSI_GREEN + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
-                    if (Main.team2.contains(human)) out = "|" + (AnsiColors.ANSI_BLUE + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    if (Main.team1.contains(human)) out = "|" + (AnsiColors.ANSI_GREEN + human.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
+                    if (Main.team2.contains(human)) out = "|" + (AnsiColors.ANSI_BLUE + human.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
             }
@@ -52,7 +52,7 @@ public class View {
             System.out.print("_".repeat(l[0]*2));
             System.out.println("");
             System.out.print(top10 + "    ");
-            System.out.print(AnsiColors.ANSI_GREEN+":\tGreen side"+AnsiColors.ANSI_RESET);
+            System.out.print(AnsiColors.ANSI_GREEN+"\tGreen side"+AnsiColors.ANSI_RESET);
             //for (int i = 0; i < l[0]-9; i++)
             System.out.print(" ".repeat(l[0]-9));
             System.out.println(AnsiColors.ANSI_BLUE+"Blue side"+AnsiColors.ANSI_RESET);
